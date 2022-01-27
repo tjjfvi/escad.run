@@ -1,4 +1,4 @@
-import "/transpiled/https://escad.dev/client/stylus/HierarchyLog.styl.js";
+// @style "./stylus/HierarchyLog.styl"
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { HierarchyLog } from "/transpiled/https://escad.dev/core/mod.js";
 import { registerLogType } from "/transpiled/https://escad.dev/client/LogsPane.js";

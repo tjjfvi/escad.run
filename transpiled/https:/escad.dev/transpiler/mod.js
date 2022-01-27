@@ -40,7 +40,7 @@ export function createTranspiler(ctx) {
         memo.set(url, prom);
         return prom;
     }
-    async function __transpile(url) {
+    async function fetchFile(url) {
         let response = await fetch(url);
         if (!response.ok) {
             let error = new Error(`Error fetching ${url} for transpilation`);
@@ -49,38 +49,17 @@ export function createTranspiler(ctx) {
             throw error;
         }
         let content = await response.text();
-        const transpileFn = url.endsWith(".css")
-            ? _transpileCss
-            : url.endsWith(".styl")
-                ? _transpileStyl
-                : _transpileTs;
-        return await transpileFn(url, content);
+        return content;
     }
-    async function _transpileStyl(url, content) {
-        content = [
-            await stylusStdlib,
-            stylusGlobals,
-            content,
-        ].join("\n\n\n\n\n");
-        let renderer = stylus.default(content);
-        renderer.options.imports = [];
-        let css = renderer.render();
-        return _transpileCss(url, css);
-    }
-    async function _transpileCss(url, content) {
-        let jsUrl = url + ".js";
-        let jsContent = `
-let el = document.createElement("link");
-el.type = "text/css";
-el.rel = "stylesheet";
-el.href = ${JSON.stringify(ctx.transformUrl(transformUrl(url)))};
-document.head.appendChild(el);
-await new Promise(r => el.onload = r)
-  `;
-        await ctx.cache.set(transformUrl(jsUrl), jsContent);
-        return [content, []];
-    }
-    async function _transpileTs(url, content) {
+    async function __transpile(url) {
+        let content = await fetchFile(url);
+        content = content.replace(/^\/\/ @style (".+")$/g, (_, file) => {
+            file = JSON.parse(file);
+            let jsUrl = file.endsWith(".styl")
+                ? _transpileStyl(file)
+                : _transpileCss(file);
+            return "import " + JSON.stringify(jsUrl);
+        });
         let deps = [];
         let result = ts.transpileModule(content, {
             fileName: url,
@@ -104,7 +83,7 @@ await new Promise(r => el.onload = r)
                                 let str = JSON.parse(`"${node.getText(sourceFile).slice(1, -1)}"`);
                                 let resolved = (new URL(str, url)).toString();
                                 deps.push(resolved);
-                                return ts.factory.createStringLiteral(ctx.transformUrl(transformDepUrl(resolved)));
+                                return ts.factory.createStringLiteral(ctx.transformUrl(transformUrl(resolved)));
                             }
                             return ts.visitEachChild(node, visitor, context);
                         }
@@ -114,6 +93,33 @@ await new Promise(r => el.onload = r)
             },
         });
         return [result.outputText, deps];
+    }
+    function _transpileStyl(url, _content = fetchFile(url)) {
+        return _transpileCss(url, (async () => {
+            let content = [
+                await stylusStdlib,
+                stylusGlobals,
+                await _content,
+            ].join("\n\n\n\n\n");
+            let renderer = stylus.default(content);
+            renderer.options.imports = [];
+            let css = renderer.render();
+            return css;
+        })());
+    }
+    function _transpileCss(url, content = fetchFile(url)) {
+        let jsUrl = url + ".js";
+        let jsContent = `
+let el = document.createElement("link");
+el.type = "text/css";
+el.rel = "stylesheet";
+el.href = ${JSON.stringify(ctx.transformUrl(transformUrl(url)))};
+document.head.appendChild(el);
+await new Promise(r => el.onload = r)
+  `;
+        memo.set(url, content.then((c) => ctx.cache.set(transformUrl(url), c)).then(() => []));
+        memo.set(jsUrl, ctx.cache.set(transformUrl(jsUrl), jsContent).then(() => [url]));
+        return jsUrl;
     }
 }
 let stylusStdlib = fetch("https://unpkg.com/stylus@0.56.0/lib/functions/index.styl").then((r) => r.text());
@@ -136,12 +142,6 @@ prefix(prop)
   -ms-{prop} slice(arguments, 1)
   {prop} slice(arguments, 1)
 `;
-function transformDepUrl(url) {
-    if (url.endsWith(".css") || url.endsWith(".styl")) {
-        url += ".js";
-    }
-    return transformUrl(url);
-}
 export function createTranspilerServerMessenger(transpiler, connection) {
     let runningCount = 0;
     const messenger = createMessenger({

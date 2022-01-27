@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import "/transpiled/https://escad.dev/client-builtins/stylus/Viewer3d.styl.js";
+// @style "./stylus/Viewer3d.styl"
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { createScene } from "/transpiled/https://escad.dev/client-builtins/createScene.js";
 const s = createScene();

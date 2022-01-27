@@ -1,4 +1,4 @@
-import "/transpiled/https://escad.dev/client-builtins/stylus/NumberParam.styl.js";
+// @style "./stylus/NumberParam.styl"
 import { NumberParam } from "/transpiled/https://escad.dev/builtins/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer, useComputed, useObservable } from "/transpiled/https://escad.dev/deps/rhobo.js";

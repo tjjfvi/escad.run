@@ -1,4 +1,3 @@
-import "/transpiled/https://escad.dev/client/stylus/Parameters.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
 import { ClientState } from "/transpiled/https://escad.dev/client/ClientState.js";

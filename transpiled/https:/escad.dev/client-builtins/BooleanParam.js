@@ -1,4 +1,4 @@
-import "/transpiled/https://escad.dev/client-builtins/stylus/BooleanParam.styl.js";
+// @style "./stylus/BooleanParam.styl"
 import { BooleanParam } from "/transpiled/https://escad.dev/builtins/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";

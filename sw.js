@@ -1,3 +1,5 @@
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext"/>
 /// <reference lib="webworker"/>
 const sw = self;
 let version = null;
@@ -114,7 +116,7 @@ async function updateVersion() {
     try {
         response = await fetch("/version");
     }
-    catch (e) {
+    catch {
         return;
     }
     if (!response.ok)

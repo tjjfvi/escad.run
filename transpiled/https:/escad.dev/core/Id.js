@@ -2,7 +2,7 @@ import { Timer } from "/transpiled/https://escad.dev/core/Timer.js";
 const ids = new Set();
 export const idRegex = /^(?<packageName>(?:@[\w-]+\/)?[\w-]+)\/(?<scope>\w+)\/(?<name>\w+)$/;
 export const Id = {
-    create: (filepath, packageName, scope, name) => {
+    create: (_filepath, packageName, scope, name) => {
         const id = `${packageName}/${scope}/${name}`;
         if (!idRegex.test(id)) {
             throw new Error("Invalid id passed to Id.create: " + id);

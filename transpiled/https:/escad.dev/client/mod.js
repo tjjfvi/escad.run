@@ -1,5 +1,5 @@
-import "/transpiled/https://escad.dev/client/stylus/fonts.css.js";
-import "/transpiled/https://escad.dev/client/stylus/index.styl.js";
+// @style "./stylus/fonts.css"
+// @style "./stylus/index.styl"
 // @create-index {"mode":"*"}
 export * from "/transpiled/https://escad.dev/client/App.js";
 export * from "/transpiled/https://escad.dev/client/ClientState.js";

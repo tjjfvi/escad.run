@@ -56,9 +56,7 @@ const TreeTextPartView = observer(({ range, children, selectable }) => {
                     state.selection([
                         ...(state.selection.value ?? []),
                         {
-                            type: event.altKey
-                                ? "exclude"
-                                : "include",
+                            type: event.altKey ? "exclude" : "include",
                             path,
                         },
                     ]);

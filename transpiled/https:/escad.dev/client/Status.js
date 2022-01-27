@@ -1,4 +1,4 @@
-import "/transpiled/https://escad.dev/client/stylus/Status.styl.js";
+// @style "./stylus/Status.styl"
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
 import { ClientState } from "/transpiled/https://escad.dev/client/ClientState.js";

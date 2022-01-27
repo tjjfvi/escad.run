@@ -1,4 +1,4 @@
-import "/transpiled/https://escad.dev/client/stylus/RawViewer.styl.js";
+// @style "./stylus/RawViewer.styl"
 import { Hierarchy } from "/transpiled/https://escad.dev/core/mod.js";
 import { UnknownProductType } from "/transpiled/https://escad.dev/core/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";

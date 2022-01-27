@@ -1,7 +1,0 @@
-.Parameters .Parameter.ObjectParam {
-  flex-direction: column;
-  align-items: stretch;
-}
-.Parameters .Parameter.ObjectParam > .children {
-  margin-left: 10px;
-}
