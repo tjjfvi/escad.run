@@ -1,0 +1,11 @@
+.Viewer3d {
+  width: 100%;
+  height: 100%;
+}
+.Viewer3d * {
+  position: absolute;
+}
+.Viewer3d .orient {
+  right: 0;
+  top: 0;
+}

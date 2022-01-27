@@ -1,0 +1,60 @@
+.Preview {
+  padding: 0;
+  display: inline-block;
+  flex: 1;
+  position: relative;
+}
+.Preview.loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.Preview.loading > .Loading {
+  --size: 100px;
+  color: #454850;
+}
+.Preview.none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #656870;
+}
+.Preview.none .header {
+  font-size: 20px;
+}
+.Preview .menubar {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  transform: translate(0, -100%);
+}
+.Preview .menubar > div {
+  display: flex;
+  flex-direction: column;
+  transform: translate(0, 50px);
+  transition: transform 0.5s;
+  margin-left: -5px;
+}
+.Preview .menubar > div:hover {
+  transform: translate(0, 100%);
+}
+.Preview .menubar > div span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  color: #656870;
+  background: #151820;
+  border: 5px solid #252830;
+  border-width: 0 5px 5px 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.Preview .menubar > div:last-child span:last-child {
+  border-radius: 0 0 10px 0;
+}
