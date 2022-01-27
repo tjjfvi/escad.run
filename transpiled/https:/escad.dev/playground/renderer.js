@@ -10,7 +10,7 @@ import {
   workerConnection,
   serializeConnection,
   logConnection,
-} from "/messages/mod.ts";
+} from "${escadLocation}/messages/mod.ts";
 import { createRendererServerMessenger } from "${escadLocation}/renderer/mod.ts";
 import { VfsArtifactStore } from "${escadLocation}/playground/VfsArtifactStore.ts";
 
