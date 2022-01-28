@@ -139,7 +139,6 @@ export const createMessenger = (({ impl, connection, onDestroy, }) => {
         }
         const [kind, id, key, ...args] = msg;
         if (kind === "retry") {
-            console.log(retryMessages);
             for (const message of retryMessages) {
                 connection.send(message);
             }
