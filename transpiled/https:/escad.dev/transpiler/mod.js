@@ -53,8 +53,9 @@ export function createTranspiler(ctx) {
     }
     async function __transpile(url) {
         let content = await fetchFile(url);
-        content = content.replace(/^\/\/ @style (".+")$/g, (_, file) => {
+        content = content.replace(/^\/\/ @style (".+")$/gm, (_, file) => {
             file = JSON.parse(file);
+            file = new URL(file, url).toString();
             let jsUrl = file.endsWith(".styl")
                 ? _transpileStyl(file)
                 : _transpileCss(file);

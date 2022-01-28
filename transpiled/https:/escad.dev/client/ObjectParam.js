@@ -1,4 +1,4 @@
-// @style "./stylus/ObjectParam.styl"
+import "/transpiled/https://escad.dev/client/stylus/ObjectParam.styl.js";
 import { ObjectParam } from "/transpiled/https://escad.dev/core/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";

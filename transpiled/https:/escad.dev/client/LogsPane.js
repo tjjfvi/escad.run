@@ -1,4 +1,4 @@
-// @style "./stylus/LogsPane.styl"
+import "/transpiled/https://escad.dev/client/stylus/LogsPane.styl.js";
 import { IdView } from "/transpiled/https://escad.dev/client/IdView.js";
 import { observer, useFromProm } from "/transpiled/https://escad.dev/deps/rhobo.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";

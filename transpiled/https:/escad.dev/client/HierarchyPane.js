@@ -1,4 +1,4 @@
-// @style "./stylus/Hierarchy.styl"
+import "/transpiled/https://escad.dev/client/stylus/Hierarchy.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer, useObservable } from "/transpiled/https://escad.dev/deps/rhobo.js";
 import { ClientState } from "/transpiled/https://escad.dev/client/ClientState.js";

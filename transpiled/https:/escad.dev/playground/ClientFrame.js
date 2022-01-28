@@ -1,4 +1,4 @@
-// @style "./stylus/ClientFrame.styl"
+import "/transpiled/https://escad.dev/playground/stylus/ClientFrame.styl.js";
 import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection, } from "/transpiled/https://escad.dev/messages/mod.js";
 import { server } from "/transpiled/https://escad.dev/playground/server.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";

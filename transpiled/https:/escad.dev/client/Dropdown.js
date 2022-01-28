@@ -1,7 +1,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="esnext"/>
 /// <reference lib="dom"/>
-// @style "./stylus/Dropdown.styl"
+import "/transpiled/https://escad.dev/client/stylus/Dropdown.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
 export const Dropdown = observer(({ options, value }) => {

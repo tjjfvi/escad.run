@@ -1,4 +1,4 @@
-// @style "./stylus/Pane.styl"
+import "/transpiled/https://escad.dev/client/stylus/Pane.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { useObservable } from "/transpiled/https://escad.dev/deps/rhobo.js";
 // eslint-disable-next-line react/prop-types

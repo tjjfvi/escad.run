@@ -1,4 +1,4 @@
-// @style "./stylus/Preview.styl"
+import "/transpiled/https://escad.dev/client/stylus/Preview.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { viewerRegistry } from "/transpiled/https://escad.dev/client/ViewerRegistry.js";
 import { observer, useObservable } from "/transpiled/https://escad.dev/deps/rhobo.js";
