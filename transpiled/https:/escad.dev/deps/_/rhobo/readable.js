@@ -1,12 +1,12 @@
 import React from "/transpiled/https://escad.dev/deps/react.js";
-import { EventEmitter } from "/transpiled/https://escad.dev/deps/tsee.js";
+import { tsee } from "/transpiled/https://escad.dev/deps/tsee.js";
 import { MultiSet } from "/transpiled/https://escad.dev/deps/_/rhobo/MultiSet.js";
 import { Callable } from "/transpiled/https://escad.dev/deps/_/rhobo/Callable.js";
 import { use_ } from "/transpiled/https://escad.dev/deps/_/rhobo/use_.js";
 let cur;
-class EE extends EventEmitter {
+class EE extends tsee.EventEmitter {
 }
-export class Readable extends Callable(EventEmitter) {
+export class Readable extends Callable(tsee.EventEmitter) {
     value;
     alive = true;
     symb;
