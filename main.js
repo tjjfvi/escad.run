@@ -1,5 +1,3 @@
-/// <reference no-default-lib="true"/>
-/// <reference lib="esnext"/>
 /// <reference lib="dom"/>
 import "/transpiled/https://escad.dev/playground/swApi.js";
 import "/transpiled/https://escad.dev/client/stylus/index.styl.js";
