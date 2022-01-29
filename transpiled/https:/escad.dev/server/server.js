@@ -48,7 +48,6 @@ export const createServer = async ({ createRendererConnection, transpilerConnect
                 },
                 async run(params) {
                     reloadRenderer();
-                    console.log("hmm");
                     const info = await renderer.run(params);
                     updateClientPlugins(info.clientPlugins);
                     messenger.emit("info", info);
@@ -58,14 +57,12 @@ export const createServer = async ({ createRendererConnection, transpilerConnect
             connection,
         });
         reloadRenderer();
-        console.log("hmm2");
         messenger.emit("reload", transpiler.on("transpileFinish"));
         messenger.emit("changeObserved", events.on("changeObserved"));
         return messenger;
         function reloadRenderer() {
             console.log("Reloading renderer");
             renderer = createRendererMessenger(messenger.lookupRaw);
-            console.log("WOOT");
             messenger.emit("log", renderer.on("log"));
             renderer.on("renderStart", () => console.log("Render started"));
             renderer.on("renderFinish", () => console.log("Render finished"));

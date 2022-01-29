@@ -8,7 +8,6 @@ if (typeof window !== "undefined" && window.parent === window) {
     if (!sw)
         throw new Error("Missing service worker");
     let p = new Promise((r) => navigator.serviceWorker.addEventListener("message", (ev) => {
-        console.log(ev.data);
         r();
     }));
     sw.postMessage("ping");
