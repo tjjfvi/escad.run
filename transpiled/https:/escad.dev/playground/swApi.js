@@ -7,7 +7,7 @@ if (typeof window !== "undefined" && window.parent === window) {
     let sw = reg.installing ?? reg.active;
     if (!sw)
         throw new Error("Missing service worker");
-    let p = new Promise((r) => navigator.serviceWorker.addEventListener("message", (ev) => {
+    let p = new Promise((r) => navigator.serviceWorker.addEventListener("message", (_ev) => {
         r();
     }));
     sw.postMessage("ping");

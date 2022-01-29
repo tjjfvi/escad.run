@@ -1,4 +1,3 @@
-/// <reference lib="dom"/>
 import "/transpiled/https://escad.dev/playground/swApi.js";
 import "/transpiled/https://escad.dev/client/stylus/index.styl.js";
 import "/transpiled/https://escad.dev/client/stylus/fonts.css.js";
