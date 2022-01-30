@@ -1,11 +1,9 @@
-import { debounce } from "/transpiled/https://escad.dev/playground/debounce.js";
-import { code, setCode } from "/transpiled/https://escad.dev/playground/code.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { Pane } from "/transpiled/https://escad.dev/client/Pane.js";
 import { Editor, monaco } from "/transpiled/https://escad.dev/deps/monaco.js";
-export const EditorPane = () => (React.createElement(Pane, { name: "Editor", left: true, defaultWidth: 600, minWidth: 200, defaultOpen: true },
+export const EditorPane = ({ projectManager }) => (React.createElement(Pane, { name: "Editor", left: true, defaultWidth: 600, minWidth: 200, defaultOpen: true },
     React.createElement(Editor, { onMount: (editor) => {
-            augmentMonacoEditor(editor);
+            augmentMonacoEditor(editor, projectManager);
         }, options: {
             minimap: {
                 enabled: false,
@@ -27,11 +25,11 @@ monaco.editor.defineTheme("escad", {
     },
 });
 const depsRegex = /(from\s*|import\s*)(["'])(.+?)\2/g;
-export const augmentMonacoEditor = (editor) => {
+export const augmentMonacoEditor = (editor, projectManager) => {
     const mainModel = monaco.editor.createModel("", "typescript", monaco.Uri.parse("/project/index.ts"));
     editor.setModel(mainModel);
     mainModel.onDidChangeContent(debounce(onChange, 1000));
-    mainModel.setValue(code);
+    mainModel.setValue(projectManager.getCode());
     const files = new Set();
     const bannedCharacters = /[^\w/.-]/g;
     let aliasesUri = monaco.Uri.parse("file:///aliases");
@@ -83,9 +81,25 @@ export const augmentMonacoEditor = (editor) => {
             }
         });
     }
+    projectManager.events.on("codeChange", (value) => {
+        if (value !== mainModel.getValue()) {
+            mainModel.setValue(value);
+        }
+    });
     async function onChange() {
-        setCode(mainModel.getValue());
-        await Promise.all([...code.matchAll(depsRegex)].map((x) => addFile(x[3])));
+        const value = mainModel.getValue();
+        if (value !== projectManager.getCode()) {
+            projectManager.setCode(value);
+        }
+        await Promise.all([...value.matchAll(depsRegex)].map((x) => addFile(x[3])));
     }
     return editor;
+};
+const debounce = (fn, amount) => {
+    let timer = null;
+    return () => {
+        if (timer)
+            clearTimeout(timer);
+        timer = setTimeout(fn, amount);
+    };
 };
