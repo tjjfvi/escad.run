@@ -1,4 +1,4 @@
-import { brandConnection, createMessenger, filterConnection, transformConnection, } from "/transpiled/https://escad.dev/messages/mod.js";
+import { brandConnection, createMessenger, filterConnection, transformConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import ReactDOM from "/transpiled/https://escad.dev/deps/react-dom.js";
 import { App, ClientState, Loading, mdi } from "/transpiled/https://escad.dev/client/mod.js";

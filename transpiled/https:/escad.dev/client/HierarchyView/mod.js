@@ -1,4 +1,4 @@
-// @create-index {"mode":"*"}
+// moderate
 export * from "/transpiled/https://escad.dev/client/HierarchyView/HierarchyView.js";
 export * from "/transpiled/https://escad.dev/client/HierarchyView/NestableSpan.js";
 export * from "/transpiled/https://escad.dev/client/HierarchyView/State.js";

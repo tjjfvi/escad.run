@@ -1,4 +1,4 @@
-import { createEventEmitter } from "/transpiled/https://escad.dev/messages/mod.js";
+import { createEventEmitter } from "/transpiled/https://escad.dev/messaging/mod.js";
 export function createProjectManager(host) {
     let projects = host.initialProjectList;
     let curProject = projects[0] ??= {

@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { $string, $uint8, registerType, Serializer } from "/transpiled/https://escad.dev/serial/mod.js";
-import { ArrayProductType } from "/transpiled/https://escad.dev/core/ArrayProduct.js";
-import { assertNever } from "/transpiled/https://escad.dev/core/assertNever.js";
-import { HashProductType } from "/transpiled/https://escad.dev/core/HashProduct.js";
-import { LeafProductType } from "/transpiled/https://escad.dev/core/LeafProduct.js";
-import { MarkedProductType } from "/transpiled/https://escad.dev/core/MarkedProduct.js";
-import { TupleProductType } from "/transpiled/https://escad.dev/core/TupleProduct.js";
-import { UnknownProductType } from "/transpiled/https://escad.dev/core/UnknownProduct.js";
+import { ArrayProductType, HashProductType, LeafProductType, MarkedProductType, TupleProductType, UnknownProductType, } from "/transpiled/https://escad.dev/core/product/mod.js";
+import { assertNever } from "/transpiled/https://escad.dev/core/utils/mod.js";
 import { $hash } from "/transpiled/https://escad.dev/core/serializers/$hash.js";
 import { $id } from "/transpiled/https://escad.dev/core/serializers/$id.js";
 export const $productType = new Serializer({

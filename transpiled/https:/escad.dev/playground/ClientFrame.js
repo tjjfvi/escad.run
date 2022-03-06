@@ -1,5 +1,5 @@
 import "/transpiled/https://escad.dev/playground/stylus/ClientFrame.styl.js";
-import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection, } from "/transpiled/https://escad.dev/messages/mod.js";
+import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
 export const ClientFrame = observer(({ clientUrl, server, share }) => {

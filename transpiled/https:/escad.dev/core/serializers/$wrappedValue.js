@@ -1,5 +1,5 @@
 import { $unknown, Serializer } from "/transpiled/https://escad.dev/serial/mod.js";
-import { WrappedValue } from "/transpiled/https://escad.dev/core/WrappedValue.js";
+import { WrappedValue } from "/transpiled/https://escad.dev/core/artifacts/mod.js";
 export const $wrappedValue = new Serializer({
     s: ({ value }) => $unknown.s(value),
     *d() {

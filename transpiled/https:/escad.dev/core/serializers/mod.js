@@ -1,4 +1,4 @@
-// @create-index {"mode":"*"}
+// moderate
 export * from "/transpiled/https://escad.dev/core/serializers/$hash.js";
 export * from "/transpiled/https://escad.dev/core/serializers/$id.js";
 export * from "/transpiled/https://escad.dev/core/serializers/$product.js";

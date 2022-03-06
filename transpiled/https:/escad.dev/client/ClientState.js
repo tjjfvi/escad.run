@@ -1,7 +1,7 @@
 import { computed, observable } from "/transpiled/https://escad.dev/deps/rhobo.js";
 import { $wrappedValue, } from "/transpiled/https://escad.dev/core/mod.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
-import { createConnectionPair, createMessenger, logConnection, serializeConnection, } from "/transpiled/https://escad.dev/messages/mod.js";
+import { createConnectionPair, createMessenger, logConnection, serializeConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
 import { resolveHierarchySelection, } from "/transpiled/https://escad.dev/client/HierarchySelection.js";
 import { Loading } from "/transpiled/https://escad.dev/client/Loading.js";
 import { mdi } from "/transpiled/https://escad.dev/client/Icon.js";

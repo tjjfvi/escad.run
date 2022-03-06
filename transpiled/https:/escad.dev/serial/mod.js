@@ -19,7 +19,7 @@ registerType("Uint8Array", $buffer);
 registerType("Array", $array($unknown));
 registerType("Map", $map($unknown, $unknown));
 registerType("Set", $set($unknown));
-// @create-index {"mode":"*"}
+// moderate
 export * from "/transpiled/https://escad.dev/serial/$array.js";
 export * from "/transpiled/https://escad.dev/serial/$boolean.js";
 export * from "/transpiled/https://escad.dev/serial/$buffer.js";

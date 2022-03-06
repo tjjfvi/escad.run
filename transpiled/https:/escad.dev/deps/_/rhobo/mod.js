@@ -1,4 +1,4 @@
-// @create-index {"mode":"*","ignore":["Callable.ts","MultiSet.ts"]}
+// moderate --exclude Callable.ts --exclude MultiSet.ts
 export * from "/transpiled/https://escad.dev/deps/_/rhobo/computed.js";
 export * from "/transpiled/https://escad.dev/deps/_/rhobo/fromPromise.js";
 export * from "/transpiled/https://escad.dev/deps/_/rhobo/observable.js";

@@ -1,7 +1,6 @@
 import "/transpiled/https://escad.dev/client/stylus/Pane.styl.js";
 import React from "/transpiled/https://escad.dev/deps/react.js";
 import { useObservable } from "/transpiled/https://escad.dev/deps/rhobo.js";
-// eslint-disable-next-line react/prop-types
 export const Pane = ({ name, className = name, children, right = false, left = !right, defaultWidth = 500, resizable = true, defaultOpen = false, minWidth = 100, }) => {
     const width = useObservable.use(defaultWidth);
     const open = useObservable.use(defaultOpen);

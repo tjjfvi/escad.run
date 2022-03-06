@@ -1,6 +1,6 @@
 import "/transpiled/https://escad.dev/core/mod.js"; // register serializers, needed for talking to renderer
-import { createEventEmitter, createMessenger, logConnection, } from "/transpiled/https://escad.dev/messages/mod.js";
-import { transformUrl } from "/transpiled/https://escad.dev/transpiler/transformUrl.js";
+import { createEventEmitter, createMessenger, logConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
+import { transformUrl } from "/transpiled/https://escad.dev/server/transformUrl.js";
 export const createServer = async ({ createRendererConnection, transpilerConnection, coreClientUrl, writeClientRoot, getTranspiledUrl, mapClientPlugins = (x) => x, initialPump = true, }) => {
     const createRendererMessenger = (lookupRaw) => createMessenger({
         impl: { lookupRaw },
