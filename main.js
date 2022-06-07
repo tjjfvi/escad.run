@@ -1,128 +1,157 @@
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+
+/** @jsxImportSource solid */
 import "/transpiled/https://escad.dev/client/stylus/index.styl.js";
 import "/transpiled/https://escad.dev/client/stylus/fonts.css.js";
 import { clientId, put } from "/transpiled/https://escad.dev/playground/swApi.js";
-import ReactDOM from "/transpiled/https://escad.dev/deps/react-dom.js";
-import React from "/transpiled/https://escad.dev/deps/react.js";
+import { render } from "/transpiled/https://escad.dev/deps/solid.js";
 import { ProjectPane } from "/transpiled/https://escad.dev/playground/ProjectPane.js";
 import { EditorPane } from "/transpiled/https://escad.dev/playground/EditorPane.js";
 import { ClientFrame } from "/transpiled/https://escad.dev/playground/ClientFrame.js";
-import { brandConnection, createMessenger, serializeConnection, workerConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
+import { brandConnection, createMessenger, serializeConnection, workerConnection } from "/transpiled/https://escad.dev/messaging/mod.js";
 import { createServer as _createServer } from "/transpiled/https://escad.dev/server/server.js";
 import { getTranspiledUrl } from "/transpiled/https://escad.dev/playground/getTranspiledUrl.js";
 import { transformUrl } from "/transpiled/https://escad.dev/server/transformUrl.js";
 import { createProjectManager } from "/transpiled/https://escad.dev/playground/projectManager.js";
-const escadLocation = location.hostname === "localhost"
-    ? location.origin
-    : "https://escad.dev";
+const escadLocation = location.hostname === "localhost" ? location.origin : "https://escad.dev";
 const clientUrl = `/${clientId}/index.html`;
 const clientHtmlProm = put(clientUrl, getClientHtml());
 const rendererFileUrl = `/${clientId}/renderer.ts`;
 const rendererFileProm = put(rendererFileUrl, getRendererContent());
 export const transpilerConnection = workerConnection(worker(getTranspiledUrl(transformUrl(escadLocation + "/playground/transpilerWorker.ts"))));
 export const transpiler = createMessenger({
-    impl: {},
-    connection: brandConnection(transpilerConnection, "a"),
+  impl: {},
+  connection: brandConnection(transpilerConnection, "a")
 });
 const loadingCode = "/* loading... */";
 const projectManager = createProjectManager({
-    initialProjectList: await getInitialProjects(),
-    setProjectList: (projectList) => localStorage.setItem("projectList", JSON.stringify(projectList)),
-    getCode: (projectId) => {
-        if (projectId.type === "local") {
-            return localStorage.getItem(projectId.id) ?? getInitialCode();
-        }
-        fetch(projectId.url).then((r) => r.text()).then((value) => {
-            if (projectManager.getCurProject() === projectId) {
-                projectManager.setCode(value, false);
-            }
-        });
-        return loadingCode;
-    },
-    setCode: (id, code) => localStorage.setItem(id, code),
-});
-if (projectManager.getCode() === loadingCode) {
-    await projectManager.events.once("codeChange");
-}
-const firstTranspileMain = transpileMain();
-projectManager.events.on("codeChange", (value) => {
-    if (value !== loadingCode) {
-        transpileMain();
+  initialProjectList: await getInitialProjects(),
+  setProjectList: projectList => localStorage.setItem("projectList", JSON.stringify(projectList)),
+  getCode: projectId => {
+    if (projectId.type === "local") {
+      return localStorage.getItem(projectId.id) ?? getInitialCode();
     }
+
+    fetch(projectId.url).then(r => r.text()).then(value => {
+      if (projectManager.getCurProject() === projectId) {
+        projectManager.setCode(value, false);
+      }
+    });
+    return loadingCode;
+  },
+  setCode: (id, code) => localStorage.setItem(id, code)
+});
+
+if (projectManager.getCode() === loadingCode) {
+  await projectManager.events.once("codeChange");
+}
+
+const firstTranspileMain = transpileMain();
+projectManager.events.on("codeChange", value => {
+  if (value !== loadingCode) {
+    transpileMain();
+  }
 });
 const server = await createServer();
 await clientHtmlProm;
-ReactDOM.render(React.createElement(React.Fragment, null,
-    React.createElement(ProjectPane, { ...{ projectManager } }),
-    React.createElement(EditorPane, { ...{ projectManager } }),
-    React.createElement(ClientFrame, { ...{ clientUrl, server, share } })), document.getElementById("root"));
+const root = document.getElementById("root");
+
+while (root.firstChild) root.removeChild(root.firstChild);
+
+render(() => [_$createComponent(ProjectPane, {
+  projectManager: projectManager
+}), _$createComponent(EditorPane, {
+  projectManager: projectManager
+}), _$createComponent(ClientFrame, {
+  clientUrl: clientUrl,
+  server: server,
+  share: share
+})], root);
+
 async function getInitialProjects() {
-    const projects = JSON.parse(localStorage.getItem("projectList") ?? "[]");
-    if (window.location.hash) {
-        let hash = window.location.hash.slice(1);
-        let url = `https://api.escad.run/${hash}.ts`;
-        let ind = projects.findIndex((v) => v.type === "remote" && v.url === url);
-        if (ind !== -1) {
-            projects.splice(ind, 1);
-        }
-        projects.unshift({
-            type: "remote",
-            url,
-            name: `escad.run/#${hash}`,
-            forkName: hash + "-fork",
-        });
+  const projects = JSON.parse(localStorage.getItem("projectList") ?? "[]");
+
+  if (window.location.hash) {
+    let hash = window.location.hash.slice(1);
+    let url = `https://api.escad.run/${hash}.ts`;
+    let ind = projects.findIndex(v => v.type === "remote" && v.url === url);
+
+    if (ind !== -1) {
+      projects.splice(ind, 1);
     }
-    return projects;
+
+    projects.unshift({
+      type: "remote",
+      url,
+      name: `escad.run/#${hash}`,
+      forkName: hash + "-fork"
+    });
+  }
+
+  return projects;
 }
+
 async function createServer() {
-    await rendererFileProm;
-    await transpiler.transpile(location.origin + rendererFileUrl);
-    await firstTranspileMain;
-    const server = await _createServer({
-        createRendererConnection: () => serializeConnection(workerConnection(worker(getTranspiledUrl(transformUrl(location.origin + rendererFileUrl))))),
-        transpilerConnection: brandConnection(transpilerConnection, "b"),
-        coreClientUrl: escadLocation + "/playground/client.tsx",
-        writeClientRoot: async (content) => {
-            await put(`${clientId}/client.js`, content);
-        },
-        mapClientPlugins: (url) => {
-            if (url.startsWith(location.origin + "/transpiled/")) {
-                return url.slice((location.origin + "/transpiled/").length);
-            }
-            return url;
-        },
-        getTranspiledUrl,
-    });
-    server.events.emit("changeObserved", transpiler.on("transpileFinish"));
-    return server;
+  await rendererFileProm;
+  await transpiler.transpile(location.origin + rendererFileUrl);
+  await firstTranspileMain;
+  const server = await _createServer({
+    createRendererConnection: () => serializeConnection(workerConnection(worker(getTranspiledUrl(transformUrl(location.origin + rendererFileUrl))))),
+    transpilerConnection: brandConnection(transpilerConnection, "b"),
+    coreClientUrl: escadLocation + "/playground/client.tsx",
+    writeClientRoot: async content => {
+      await put(`${clientId}/client.js`, content);
+    },
+    mapClientPlugins: url => {
+      if (url.startsWith(location.origin + "/transpiled/")) {
+        return url.slice((location.origin + "/transpiled/").length);
+      }
+
+      return url;
+    },
+    getTranspiledUrl
+  });
+  server.events.emit("changeObserved", transpiler.on("transpileFinish"));
+  return server;
 }
+
 async function share() {
-    const response = await fetch("https://api.escad.run/create", {
-        method: "POST",
-        body: JSON.stringify({
-            code: projectManager.getCode(),
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-    if (!response.ok) {
-        console.error(response);
-        return null;
+  const response = await fetch("https://api.escad.run/create", {
+    method: "POST",
+    body: JSON.stringify({
+      code: projectManager.getCode()
+    }),
+    headers: {
+      "Content-Type": "application/json"
     }
-    const { short } = await response.json();
-    window.location;
-    history.pushState({}, "Playground", "#" + short);
-    return window.location.toString();
+  });
+
+  if (!response.ok) {
+    console.error(response);
+    return null;
+  }
+
+  const {
+    short
+  } = await response.json();
+  window.location;
+  history.pushState({}, "Playground", "#" + short);
+  return window.location.toString();
 }
+
 async function transpileMain() {
-    await put(`${clientId}/main.ts`, projectManager.getCode());
-    await transpiler.transpile(new URL(`/${clientId}/main.ts`, import.meta.url).toString(), true);
+  await put(`${clientId}/main.ts`, projectManager.getCode());
+  await transpiler.transpile(new URL(`/${clientId}/main.ts`, import.meta.url).toString(), true);
 }
+
 function worker(url) {
-    return new Worker(url, { type: "module" });
+  return new Worker(url, {
+    type: "module"
+  });
 }
+
 function getClientHtml() {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,8 +171,9 @@ function getClientHtml() {
 </html>
   `.trim();
 }
+
 function getRendererContent() {
-    return `
+  return `
 import { artifactManager, ArtifactStore, logger } from "${escadLocation}/core/mod.ts";
 import {
   createMessenger,
@@ -158,13 +188,14 @@ artifactManager.artifactStores.unshift(new VfsArtifactStore());
 
 createRendererServerMessenger(
   logConnection(serializeConnection(workerConnection(self as any))),
-  () => import(${JSON.stringify(`/${clientId}/transpiled/main.js`)})
+  () => import(${JSON.stringify(`/${clientId}/transpiled/main.js`)}),
   logger,
 ).requestRetry();
 	`.trim();
 }
+
 function getInitialCode() {
-    const base = `
+  const base = `
 import {
   escad,
   booleanParam,
@@ -224,7 +255,7 @@ function rad(rad: number) {
   return rad * (180 / Math.PI);
 }
 `;
-    const code = base.replace(/#escad\//g, `${escadLocation}/`);
-    console.log(code);
-    return code;
+  const code = base.replace(/#escad\//g, `${escadLocation}/`);
+  console.log(code);
+  return code;
 }

@@ -1,9 +1,19 @@
-import { transformConnection } from "/transpiled/https://escad.dev/messaging/transformConnection.js";
 /* istanbul ignore next: covered by types, noisy to test */
-export const logConnection = (connection) => transformConnection(connection, (value) => {
-    console.log("send", ...[].concat(value));
-    return value;
-}, (value) => {
-    console.log("recv", ...[].concat(value));
-    return value;
-});
+export const logConnection = (connection, ...label) => {
+  const off = connection.onMsg(value => {
+    console.log(...label, "recv", ...[].concat(value));
+  });
+  return {
+    send: value => {
+      console.log(...label, "send", ...[].concat(value));
+      connection.send(value);
+    },
+    onMsg: cb => {
+      return connection.onMsg(cb);
+    },
+    destroy: () => {
+      off();
+      connection.destroy?.();
+    }
+  };
+};

@@ -1,0 +1,3 @@
+/* esm.sh - @babel/preset-typescript@7.17.12 */
+export * from "/transpiled/https://esm.sh/v85/@babel/preset-typescript@7.17.12/X-YS9AYmFiZWwvaGlnaGxpZ2h0OmJhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbQpkL2JhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbUAwLjAuMg/esnext/preset-typescript.js";
+export { default } from "/transpiled/https://esm.sh/v85/@babel/preset-typescript@7.17.12/X-YS9AYmFiZWwvaGlnaGxpZ2h0OmJhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbQpkL2JhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbUAwLjAuMg/esnext/preset-typescript.js";

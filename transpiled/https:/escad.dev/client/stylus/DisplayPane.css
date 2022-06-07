@@ -1,0 +1,60 @@
+.DisplayPane {
+  padding: 0;
+  display: inline-block;
+  flex: 1;
+  position: relative;
+}
+.DisplayPane.loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.DisplayPane.loading > .Loading {
+  --size: 100px;
+  color: #454850;
+}
+.DisplayPane.none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #656870;
+}
+.DisplayPane.none .header {
+  font-size: 20px;
+}
+.DisplayPane .menubar {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  transform: translate(0, -100%);
+}
+.DisplayPane .menubar > div {
+  display: flex;
+  flex-direction: column;
+  transform: translate(0, 50px);
+  transition: transform 0.5s;
+  margin-left: -5px;
+}
+.DisplayPane .menubar > div:hover {
+  transform: translate(0, 100%);
+}
+.DisplayPane .menubar > div span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  color: #656870;
+  background: #151820;
+  border: 5px solid #252830;
+  border-width: 0 5px 5px 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.DisplayPane .menubar > div:last-child span:last-child {
+  border-radius: 0 0 10px 0;
+}

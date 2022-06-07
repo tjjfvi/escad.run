@@ -1,2 +1,2 @@
-/* esm.sh - three@0.112.0/examples/jsm/utils/BufferGeometryUtils */
-export * from "/transpiled/https://cdn.esm.sh/v66/three@0.112.0/X-YWxpYXM6Li4vLi4vLi4vYnVpbGQvdGhyZWUubW9kdWxlLmpzOnRocmVl/deno/examples/jsm/utils/BufferGeometryUtils.js";
+/* esm.sh - three@0.112.1/examples/jsm/utils/BufferGeometryUtils */
+export * from "/transpiled/https://esm.sh/v85/three@0.112.1/deno/examples/jsm/utils/BufferGeometryUtils.js";

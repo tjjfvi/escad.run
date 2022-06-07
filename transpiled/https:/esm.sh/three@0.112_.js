@@ -1,2 +1,2 @@
-/* esm.sh - three@0.112.0 */
-export * from "/transpiled/https://cdn.esm.sh/v66/three@0.112.0/deno/three.js";
+/* esm.sh - three@0.112.1 */
+export * from "/transpiled/https://esm.sh/v85/three@0.112.1/deno/three.js";

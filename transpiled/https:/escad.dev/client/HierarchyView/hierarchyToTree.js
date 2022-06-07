@@ -1,5 +1,8 @@
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+
+/** @jsxImportSource solid */
 import { TreePart } from "/transpiled/https://escad.dev/client/HierarchyView/Tree.js";
-import { TreeTextPart, TreeTextRange } from "/transpiled/https://escad.dev/client/HierarchyView/TreeText.js";
+import { TreeTextPart } from "/transpiled/https://escad.dev/client/HierarchyView/TreeText.js";
 /**
  * Converts a `Hierarchy` to a `Tree`
  * @param engine
@@ -12,16 +15,25 @@ import { TreeTextPart, TreeTextRange } from "/transpiled/https://escad.dev/clien
  *   The path to get to this hierarchy from root. For the root call, this is `[]` (the default).
  *   Controls state memoization as well as selection behavior.
  */
-export function hierarchyToTree(engine, hierarchy, stateMemo, path = []) {
-    return wrapTreeSelectable(path, hierarchy.linkedProducts, _hierarchyToTree(engine, hierarchy, stateMemo, path));
+
+export function hierarchyToTree(engine, hierarchy, stateMemo, Selectable, path = []) {
+  return wrapTreeSelectable(path, hierarchy.linkedProducts, _hierarchyToTree(engine, hierarchy, stateMemo, path, Selectable), Selectable);
 }
-function _hierarchyToTree(engine, hierarchy, stateMemo, path) {
-    return engine[hierarchy.type]({
-        path,
-        hierarchy: hierarchy,
-        stateMemo,
-        hierarchyToTree: ({ path, hierarchy }) => hierarchyToTree(engine, hierarchy, stateMemo, path),
-    });
+/**
+ * The underlying conversions used in `hierarchyToTree`
+ */
+
+function _hierarchyToTree(engine, hierarchy, stateMemo, path, Selectable) {
+  return engine[hierarchy.type]({
+    path,
+    hierarchy: hierarchy,
+    stateMemo,
+    hierarchyToTree: ({
+      path,
+      hierarchy
+    }) => hierarchyToTree(engine, hierarchy, stateMemo, Selectable, path),
+    wrapTreeSelectable: (path, linkedProducts, tree) => wrapTreeSelectable(path, linkedProducts, tree, Selectable)
+  });
 }
 /**
  * Wraps a `Tree` to be selectable
@@ -32,13 +44,20 @@ function _hierarchyToTree(engine, hierarchy, stateMemo, path) {
  * @param tree
  *   The tree to wrap
  */
-export function wrapTreeSelectable(path, linkedProducts, tree) {
-    if (!linkedProducts?.length || !tree.length) {
-        return tree;
+
+
+export function wrapTreeSelectable(path, linkedProducts, tree, Selectable) {
+  if (!linkedProducts?.length || !tree.length) {
+    return tree;
+  }
+
+  return [TreePart.Line(TreeTextPart.RangeStart(props => _$createComponent(Selectable, {
+    path: path,
+    linkedProducts: linkedProducts,
+
+    get children() {
+      return props.children;
     }
-    return [
-        TreePart.Line(TreeTextPart.RangeStart(TreeTextRange.Selectable(path))),
-        ...tree,
-        TreePart.Line(TreeTextPart.RangeEnd()),
-    ];
+
+  }))), ...tree, TreePart.Line(TreeTextPart.RangeEnd())];
 }

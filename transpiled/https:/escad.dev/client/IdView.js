@@ -1,2 +1,15 @@
-import React from "/transpiled/https://escad.dev/deps/react.js";
-export const IdView = ({ id }) => React.createElement("span", { className: "Id" }, id);
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+
+const _tmpl$ = /*#__PURE__*/_$template(`<span class="Id"></span>`, 2);
+
+/** @jsxImportSource solid */
+export const IdView = ({
+  id
+}) => (() => {
+  const _el$ = _tmpl$.cloneNode(true);
+
+  _$insert(_el$, id);
+
+  return _el$;
+})();

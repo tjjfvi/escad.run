@@ -3,7 +3,6 @@
   overflow: hidden;
   display: flex;
   background: #151820;
-  color: #454850;
   font-weight: normal;
   transition: max-width 1s;
 }
@@ -22,6 +21,7 @@
   cursor: ew-resize;
 }
 .Pane .side {
+  color: #454850;
   cursor: pointer;
   min-width: 45px;
   max-width: 45px;
@@ -40,4 +40,11 @@
 }
 .Pane.resizing {
   transition: none;
+}
+.Pane .content > .Loading:only-child {
+  --size: 75px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #454850;
 }

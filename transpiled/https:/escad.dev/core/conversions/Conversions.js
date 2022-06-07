@@ -1,4 +1,7 @@
-export {};
+// A is assignable to B, and B is assignable to C, but A is not assignable to C
+export let TransitivityOverride;
+
+(function (_TransitivityOverride) {})(TransitivityOverride || (TransitivityOverride = {}));
 /* Tests */
 // declare global {
 //   namespace escad {

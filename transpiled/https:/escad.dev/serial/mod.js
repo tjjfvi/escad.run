@@ -18,8 +18,8 @@ registerType("undefined", $constant(undefined));
 registerType("Uint8Array", $buffer);
 registerType("Array", $array($unknown));
 registerType("Map", $map($unknown, $unknown));
-registerType("Set", $set($unknown));
-// moderate
+registerType("Set", $set($unknown)); // moderate
+
 export * from "/transpiled/https://escad.dev/serial/$array.js";
 export * from "/transpiled/https://escad.dev/serial/$boolean.js";
 export * from "/transpiled/https://escad.dev/serial/$buffer.js";

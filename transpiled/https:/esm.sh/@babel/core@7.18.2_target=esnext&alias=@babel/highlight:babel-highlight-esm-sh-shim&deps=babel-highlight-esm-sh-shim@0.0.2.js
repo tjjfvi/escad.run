@@ -1,0 +1,3 @@
+/* esm.sh - @babel/core@7.18.2 */
+export * from "/transpiled/https://esm.sh/v85/@babel/core@7.18.2/X-YS9AYmFiZWwvaGlnaGxpZ2h0OmJhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbQpkL2JhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbUAwLjAuMg/esnext/core.js";
+export { default } from "/transpiled/https://esm.sh/v85/@babel/core@7.18.2/X-YS9AYmFiZWwvaGlnaGxpZ2h0OmJhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbQpkL2JhYmVsLWhpZ2hsaWdodC1lc20tc2gtc2hpbUAwLjAuMg/esnext/core.js";

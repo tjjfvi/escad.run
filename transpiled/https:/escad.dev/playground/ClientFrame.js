@@ -1,42 +1,53 @@
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { setAttribute as _$setAttribute } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+
+const _tmpl$ = /*#__PURE__*/_$template(`<iframe class="ClientFrame"></iframe>`, 2);
+
+/** @jsxImportSource solid */
 import "/transpiled/https://escad.dev/playground/stylus/ClientFrame.styl.js";
-import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection, } from "/transpiled/https://escad.dev/messaging/mod.js";
-import React from "/transpiled/https://escad.dev/deps/react.js";
-import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
-export const ClientFrame = observer(({ clientUrl, server, share }) => {
-    const lastWindow = React.useRef();
-    const onNewWindow = React.useRef();
-    return (React.createElement("iframe", { src: clientUrl, className: "ClientFrame", ref: (iframe) => {
-            if (!iframe)
-                return;
-            const childWindow = iframe.contentWindow;
-            if (childWindow !== lastWindow.current) {
-                onNewWindow.current?.();
-                lastWindow.current = childWindow;
-                const baseConnection = transformConnection(filterConnection({
-                    send: (msg) => childWindow.postMessage(msg, "*"),
-                    onMsg: (cb) => {
-                        window.addEventListener("message", cb);
-                        return () => window.removeEventListener("message", cb);
-                    },
-                }, (ev) => ev.origin === location.origin), (x) => x, (ev) => ev.data);
-                const client = server.addClient(logConnection(brandConnection(baseConnection, "client")));
-                const shareMessenger = createMessenger({
-                    impl: {
-                        share,
-                    },
-                    connection: brandConnection(baseConnection, "share"),
-                });
-                onNewWindow.current = () => {
-                    client.destroy();
-                    shareMessenger.destroy();
-                };
-            }
-            // childWindow.addEventListener("mousemove", origEvent => {
-            //   console.log("move")
-            //   const newEvent = new CustomEvent("mousemove", { bubbles: true, cancelable: true });
-            //   const { isTrusted: _, ...origEventRedacted } = origEvent;
-            //   Object.assign(newEvent, origEventRedacted);
-            //   iframe.dispatchEvent(newEvent)
-            // })
-        } }));
-});
+import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection } from "/transpiled/https://escad.dev/messaging/mod.js";
+export const ClientFrame = props => {
+  let lastWindow;
+
+  let onNewWindow = () => {};
+
+  const iframe = (() => {
+    const _el$ = _tmpl$.cloneNode(true);
+
+    _el$.addEventListener("load", foo);
+
+    _$effect(() => _$setAttribute(_el$, "src", props.clientUrl));
+
+    return _el$;
+  })();
+
+  function foo() {
+    console.log("foo called");
+    const childWindow = iframe.contentWindow;
+    if (lastWindow === childWindow) return;
+    lastWindow = childWindow;
+    onNewWindow();
+    const baseConnection = logConnection(transformConnection(filterConnection({
+      send: msg => childWindow.postMessage(msg, "*"),
+      onMsg: cb => {
+        window.addEventListener("message", cb);
+        return () => window.removeEventListener("message", cb);
+      }
+    }, ev => ev.origin === location.origin), x => x, ev => ev.data), "ClientFrame");
+    const client = props.server.addClient(logConnection(brandConnection(baseConnection, "client"), "clientframe client"));
+    const shareMessenger = createMessenger({
+      impl: {
+        share: props.share
+      },
+      connection: brandConnection(baseConnection, "share")
+    });
+
+    onNewWindow = () => {
+      client.destroy();
+      shareMessenger.destroy();
+    };
+  }
+
+  return iframe;
+};

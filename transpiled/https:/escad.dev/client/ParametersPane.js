@@ -1,20 +1,105 @@
-import "/transpiled/https://escad.dev/client/stylus/Parameters.styl.js";
-import React from "/transpiled/https://escad.dev/deps/react.js";
-import { observer } from "/transpiled/https://escad.dev/deps/rhobo.js";
-import { ClientState } from "/transpiled/https://escad.dev/client/ClientState.js";
-import { Pane } from "/transpiled/https://escad.dev/client/Pane.js";
-import { ParameterView } from "/transpiled/https://escad.dev/client/Parameters.js";
-export const ParametersPane = observer(() => {
-    const state = React.useContext(ClientState.Context);
-    const def = state.paramDef();
-    if (!def) {
-        return React.createElement(React.Fragment, null);
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { className as _$className } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+
+const _tmpl$ = /*#__PURE__*/_$template(`<div class="ParametersPane"></div>`, 2),
+      _tmpl$2 = /*#__PURE__*/_$template(`<div class="Parameter none"><span>Cannot display parameter</span></div>`, 4),
+      _tmpl$3 = /*#__PURE__*/_$template(`<div></div>`, 2),
+      _tmpl$4 = /*#__PURE__*/_$template(`<div class="NameDesc"><span class="name"></span><span class="desc"></span></div>`, 6);
+
+/** @jsxImportSource solid */
+import "/transpiled/https://escad.dev/client/stylus/ParametersPane.styl.js";
+import { For } from "/transpiled/https://escad.dev/deps/solid.js";
+import { IdView } from "/transpiled/https://escad.dev/client/IdView.js";
+import { Loading } from "/transpiled/https://escad.dev/client/Loading.js";
+import { fetchArtifact } from "/transpiled/https://escad.dev/client/fetchArtifact.js";
+export const ParametersPane = props => {
+  const paramDefSig = fetchArtifact(props.artifactManager, () => props.paramDefHash);
+  return () => {
+    if (paramDefSig.loading) return _$createComponent(Loading, {});
+    const paramDef = paramDefSig();
+
+    if (!paramDef) {
+      return null;
     }
-    return (React.createElement(Pane, { name: "Parameters", className: "Parameters", left: true }, Object.entries(def.children).map(([key, paramDef]) => {
-        const value = state.params.obs[key];
-        if (value.value === undefined) {
-            value(paramDef.defaultValue);
+
+    return (() => {
+      const _el$ = _tmpl$.cloneNode(true);
+
+      _$insert(_el$, _$createComponent(For, {
+        get each() {
+          return Object.keys(paramDef.children);
+        },
+
+        children: key => {
+          const parameter = paramDef.children[key];
+          return _$createComponent(ParameterView, {
+            parameter: parameter,
+
+            get value() {
+              return (props.params ?? paramDef.defaultValue)[key];
+            },
+
+            setValue: value => props.setParams({ ...(props.params ?? paramDef.defaultValue),
+              [key]: value
+            })
+          });
         }
-        return React.createElement(ParameterView, { parameter: paramDef, value: value, key: key });
-    })));
-});
+      }));
+
+      return _el$;
+    })();
+  };
+};
+const parameterRegistrations = new Map();
+export const registerParameter = async registration => {
+  if (parameterRegistrations.has(registration.id)) {
+    throw new Error(`Duplicate ParameterRegistration for id ${registration.id}`);
+  }
+
+  parameterRegistrations.set(registration.id, registration);
+};
+export const ParameterView = props => {
+  const parameterRegistration = parameterRegistrations.get(props.parameter.type);
+
+  if (!parameterRegistration) {
+    return (() => {
+      const _el$2 = _tmpl$2.cloneNode(true),
+            _el$3 = _el$2.firstChild;
+
+      _$insert(_el$2, _$createComponent(IdView, {
+        get id() {
+          return props.parameter.type;
+        }
+
+      }), null);
+
+      return _el$2;
+    })();
+  }
+
+  return (() => {
+    const _el$4 = _tmpl$3.cloneNode(true);
+
+    _$insert(_el$4, _$createComponent(parameterRegistration.component, props));
+
+    _$effect(() => _$className(_el$4, "Parameter " + (parameterRegistration.class ?? "")));
+
+    return _el$4;
+  })();
+};
+export const NameDesc = ({
+  parameter
+}) => (() => {
+  const _el$5 = _tmpl$4.cloneNode(true),
+        _el$6 = _el$5.firstChild,
+        _el$7 = _el$6.nextSibling;
+
+  _$insert(_el$6, () => parameter.name);
+
+  _$insert(_el$7, () => parameter.desc);
+
+  return _el$5;
+})();

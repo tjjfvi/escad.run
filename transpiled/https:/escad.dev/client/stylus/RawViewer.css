@@ -1,13 +1,15 @@
-.Preview.RawViewer {
+.RawViewer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 }
-.Preview.RawViewer > .Loading {
+.RawViewer > .Loading {
   --size: 100px;
   color: #454850;
 }
-.Preview.RawViewer > .inner {
+.RawViewer > .inner {
   padding-top: 55px;
   padding-bottom: 150px;
   overflow: auto;

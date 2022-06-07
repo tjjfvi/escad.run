@@ -1,7 +1,7 @@
-.Projects .content {
+.ProjectPane .content {
   padding: 10px;
 }
-.Projects .content .row {
+.ProjectPane .content .row {
   color: #bdc3c7;
   border: none;
   background: none;
@@ -10,12 +10,12 @@
   width: 100%;
   cursor: pointer;
 }
-.Projects .content .row:hover {
+.ProjectPane .content .row:hover {
   background-color: #252830;
 }
-.Projects .content .row.selected {
+.ProjectPane .content .row.selected {
   background-color: #454850;
 }
-.Projects .content .row.new {
+.ProjectPane .content .row.new {
   color: #656870;
 }

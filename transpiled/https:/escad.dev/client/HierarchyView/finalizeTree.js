@@ -17,45 +17,59 @@ import { treeTextLength } from "/transpiled/https://escad.dev/client/HierarchyVi
  * Tree[Line[DummyRangeStart, String, RangeEnd], Block, Line[DummyRangeStart, String, RangeEnd, String]]
  * ```
  */
+
 export function finalizeTree(originalTree) {
-    let treeAcc = [];
-    let treeTextAcc = [];
-    let openRanges = [];
-    for (const treePart of originalTree) {
-        if (treePart.kind === "line") {
-            for (const treeTextPart of treePart.text) {
-                treeTextAcc.push(treeTextPart);
-                if (treeTextPart.kind === "string" || treeTextPart.kind === "ellipsis") {
-                    continue;
-                }
-                if (treeTextPart.kind === "rangeEnd") {
-                    openRanges.pop();
-                    continue;
-                }
-                if (treeTextPart.kind === "rangeStart") {
-                    openRanges.push(treeTextPart);
-                    continue;
-                }
-                assertNever(treeTextPart);
-            }
-            continue;
+  let treeAcc = [];
+  let treeTextAcc = [];
+  let openRanges = [];
+
+  for (const treePart of originalTree) {
+    if (treePart.kind === "line") {
+      for (const treeTextPart of treePart.text) {
+        treeTextAcc.push(treeTextPart);
+
+        if (treeTextPart.kind === "string" || treeTextPart.kind === "ellipsis") {
+          continue;
         }
-        if (!treePart.state.open) {
-            treeTextAcc.push(TreeTextPart.Ellipsis(treePart.state));
-            continue;
+
+        if (treeTextPart.kind === "rangeEnd") {
+          openRanges.pop();
+          continue;
         }
-        finishTreeTextAcc();
-        treeAcc.push({ ...treePart });
+
+        if (treeTextPart.kind === "rangeStart") {
+          openRanges.push(treeTextPart);
+          continue;
+        }
+
+        assertNever(treeTextPart);
+      }
+
+      continue;
     }
+
+    if (!treePart.state.open) {
+      treeTextAcc.push(TreeTextPart.Ellipsis(treePart.state));
+      continue;
+    }
+
     finishTreeTextAcc();
-    return treeAcc;
-    function finishTreeTextAcc() {
-        for (const {} of openRanges) {
-            treeTextAcc.push(TreeTextPart.RangeEnd());
-        }
-        if (treeTextLength(treeTextAcc)) {
-            treeAcc.push(TreePart.Line(treeTextAcc));
-        }
-        treeTextAcc = [...openRanges];
+    treeAcc.push({ ...treePart
+    });
+  }
+
+  finishTreeTextAcc();
+  return treeAcc;
+
+  function finishTreeTextAcc() {
+    for (const {} of openRanges) {
+      treeTextAcc.push(TreeTextPart.RangeEnd());
     }
+
+    if (treeTextLength(treeTextAcc)) {
+      treeAcc.push(TreePart.Line(treeTextAcc));
+    }
+
+    treeTextAcc = [...openRanges];
+  }
 }

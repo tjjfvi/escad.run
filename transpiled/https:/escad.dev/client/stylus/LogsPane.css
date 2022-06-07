@@ -1,34 +1,34 @@
-.Logs > div.content {
+.LogsPane {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
-.Logs > div.content padding-bottom,
-.Logs > div.content:after {
+.LogsPane padding-bottom,
+.LogsPane:after {
   content: "";
   height: 100px;
   flex: 0 0 auto;
 }
-.Logs .Log:not(.none) {
+.LogsPane .Log:not(.none) {
   font-size: 20px;
   font-family: Inconsolata, monospace;
 }
-.Logs .Log {
+.LogsPane .Log {
   color: #656870;
   margin-left: 5px;
 }
-.Logs .Log.loading {
+.LogsPane .Log.loading {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #454850;
 }
-.Logs .Log.none {
+.LogsPane .Log.none {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.Logs .Log.none > .Id {
+.LogsPane .Log.none > .Id {
   color: #454850;
 }
