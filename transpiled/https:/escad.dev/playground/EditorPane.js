@@ -1,5 +1,5 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div style="width: 100%; height: 100%"></div>`, 2);
 

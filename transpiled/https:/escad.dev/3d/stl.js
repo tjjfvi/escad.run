@@ -2,7 +2,6 @@ import { exportTypeRegistry, Hash, Id } from "/transpiled/https://escad.dev/core
 import { Face } from "/transpiled/https://escad.dev/3d/Face.js";
 import { Mesh } from "/transpiled/https://escad.dev/3d/Mesh.js";
 exportTypeRegistry.register({
-  type: "ExportType",
   id: Id.create(import.meta.url, "@escad/3d", "ExportType", "MeshBinaryStl"),
   name: "Binary STL",
   extension: ".stl",
@@ -30,7 +29,6 @@ exportTypeRegistry.register({
   }
 });
 exportTypeRegistry.register({
-  type: "ExportType",
   id: Id.create(import.meta.url, "@escad/3d", "ExportType", "MeshAsciiStl"),
   name: "ASCII STL",
   extension: ".stl",

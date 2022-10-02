@@ -58,3 +58,65 @@
 .DisplayPane .menubar > div:last-child span:last-child {
   border-radius: 0 0 10px 0;
 }
+.DisplayPane .Stats {
+  position: absolute;
+  display: inline-flex;
+  flex-direction: column;
+  width: 350px;
+  height: 350px;
+  bottom: 0px;
+  left: 0px;
+  background-color: #151820;
+  border: 0 solid #252830;
+  border-width: 5px 5px 0 0;
+  border-top-right-radius: 10px;
+  transform: translate(0px, 100%) translate(0px, -50px);
+  transition: transform 1s;
+}
+.DisplayPane .Stats.open {
+  transform: translate(0px, 0px) translate(0px, 0px);
+}
+.DisplayPane .Stats > span {
+  width: 100%;
+  height: 48px;
+  color: #656870;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid #252830;
+  cursor: pointer;
+}
+.DisplayPane .Stats > .content {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 300px;
+}
+.DisplayPane .Stats > .content > .stat {
+  display: flex;
+  position: relative;
+  height: 30px;
+}
+.DisplayPane .Stats > .content > .stat > span {
+  display: flex;
+  width: 50%;
+  padding: 5px;
+}
+.DisplayPane .Stats > .content > .stat > span:first-child {
+  justify-content: flex-end;
+  padding-right: 2.5px;
+  color: #656870;
+}
+.DisplayPane .Stats > .content > .stat > span:last-child {
+  justify-content: flex-start;
+  padding-left: 2.5px;
+  color: #bdc3c7;
+}
+.DisplayPane .Stats > .content > .stat:not(:first-child) {
+  border-top: 1px solid #252830;
+}
+.DisplayPane .Stats > .content > .stat .Loading {
+  color: #656870;
+  --size: 30px;
+}

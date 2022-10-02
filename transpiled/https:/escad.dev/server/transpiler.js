@@ -82,7 +82,7 @@ export function createTranspiler(ctx) {
         allowDeclareFields: true
       }]],
       plugins: [...(url.endsWith(".jsx") || url.endsWith(".tsx") ? [[babelPluginSolidJsx, {
-        moduleName: "https://esm.sh/solid-js@1.4.3/web",
+        moduleName: "https://esm.sh/solid-js@1.4.3/web?target=esnext",
         builtIns: ["For", "Show", "Switch", "Match", "Suspense", "SuspenseList", "Portal", "Index", "Dynamic", "ErrorBoundary"],
         contextToCustomElements: true,
         wrapConditionals: true,

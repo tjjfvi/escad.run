@@ -14,6 +14,7 @@ export * from "/transpiled/https://escad.dev/client/Icon.js";
 export * from "/transpiled/https://escad.dev/client/IdView.js";
 export * from "/transpiled/https://escad.dev/client/Loading.js";
 export * from "/transpiled/https://escad.dev/client/LogsPane.js";
+export * from "/transpiled/https://escad.dev/client/MemoShow.js";
 export * from "/transpiled/https://escad.dev/client/NumberParam.js";
 export * from "/transpiled/https://escad.dev/client/ObjectParam.js";
 export * from "/transpiled/https://escad.dev/client/Pane.js";

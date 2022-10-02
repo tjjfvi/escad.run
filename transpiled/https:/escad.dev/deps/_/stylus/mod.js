@@ -1,6 +1,6 @@
 import "/transpiled/https://escad.dev/deps/_/stylus/_polyfills.js";
 import { restore } from "/transpiled/https://escad.dev/deps/_/stylus/_redefineProto.js";
-import * as stylus from "/transpiled/https://esm.sh/stylus/lib/stylus.js_target=esnext.js";
+import * as stylus from "/transpiled/https://esm.sh/stylus@0.58.1/lib/stylus.js_target=esnext&pin=v85.js";
 export { stylus };
 restore();
 

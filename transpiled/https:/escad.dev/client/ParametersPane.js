@@ -1,8 +1,8 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { className as _$className } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { className as _$className } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div class="ParametersPane"></div>`, 2),
       _tmpl$2 = /*#__PURE__*/_$template(`<div class="Parameter none"><span>Cannot display parameter</span></div>`, 4),
@@ -15,34 +15,40 @@ import { For } from "/transpiled/https://escad.dev/deps/solid.js";
 import { IdView } from "/transpiled/https://escad.dev/client/IdView.js";
 import { Loading } from "/transpiled/https://escad.dev/client/Loading.js";
 import { fetchArtifact } from "/transpiled/https://escad.dev/client/fetchArtifact.js";
+import { MemoShow } from "/transpiled/https://escad.dev/client/MemoShow.js";
 export const ParametersPane = props => {
-  const paramDefSig = fetchArtifact(props.artifactManager, () => props.paramDefHash);
-  return () => {
-    if (paramDefSig.loading) return _$createComponent(Loading, {});
-    const paramDef = paramDefSig();
+  const paramDef = fetchArtifact(props.artifactManager, () => props.paramDefHash);
 
-    if (!paramDef) {
-      return null;
-    }
+  const params = () => props.params ?? paramDef().defaultValue;
 
-    return (() => {
+  return _$createComponent(MemoShow, {
+    get when() {
+      return paramDef();
+    },
+
+    get fallback() {
+      return _$createComponent(Loading, {});
+    },
+
+    children: paramDef => (() => {
       const _el$ = _tmpl$.cloneNode(true);
 
       _$insert(_el$, _$createComponent(For, {
         get each() {
-          return Object.keys(paramDef.children);
+          return Object.keys(paramDef().children);
         },
 
         children: key => {
-          const parameter = paramDef.children[key];
           return _$createComponent(ParameterView, {
-            parameter: parameter,
-
-            get value() {
-              return (props.params ?? paramDef.defaultValue)[key];
+            get parameter() {
+              return paramDef().children[key];
             },
 
-            setValue: value => props.setParams({ ...(props.params ?? paramDef.defaultValue),
+            get value() {
+              return params()[key];
+            },
+
+            setValue: value => props.setParams({ ...params(),
               [key]: value
             })
           });
@@ -50,8 +56,8 @@ export const ParametersPane = props => {
       }));
 
       return _el$;
-    })();
-  };
+    })()
+  });
 };
 const parameterRegistrations = new Map();
 export const registerParameter = async registration => {

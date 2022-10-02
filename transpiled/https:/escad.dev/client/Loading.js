@@ -1,7 +1,7 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { style as _$style } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { className as _$className } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { style as _$style } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { className as _$className } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div></div>`, 2);
 

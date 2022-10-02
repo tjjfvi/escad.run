@@ -1,9 +1,9 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { delegateEvents as _$delegateEvents } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { classList as _$classList } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { delegateEvents as _$delegateEvents } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { classList as _$classList } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div class="Pane"><div class="border"></div><div class="side"><span></span></div><div class="content"></div></div>`, 10);
 

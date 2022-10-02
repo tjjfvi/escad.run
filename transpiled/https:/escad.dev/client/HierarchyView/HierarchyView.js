@@ -1,6 +1,6 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div></div>`, 2);
 

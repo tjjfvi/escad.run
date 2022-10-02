@@ -1,4 +1,4 @@
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 /** @jsxImportSource solid */
 import { brandConnection, createMessenger, filterConnection, logConnection, transformConnection } from "/transpiled/https://escad.dev/messaging/mod.js";

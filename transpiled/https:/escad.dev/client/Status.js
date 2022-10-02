@@ -1,10 +1,10 @@
-import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { delegateEvents as _$delegateEvents } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { classList as _$classList } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { mergeProps as _$mergeProps } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
-import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web.js";
+import { template as _$template } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { delegateEvents as _$delegateEvents } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { classList as _$classList } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { effect as _$effect } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { mergeProps as _$mergeProps } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { insert as _$insert } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
+import { createComponent as _$createComponent } from "/transpiled/https://esm.sh/solid-js@1.4.3/web_target=esnext.js";
 
 const _tmpl$ = /*#__PURE__*/_$template(`<div class="Statuses"></div>`, 2),
       _tmpl$2 = /*#__PURE__*/_$template(`<div class="Status"><div class="icons"></div><span></span></div>`, 6);
